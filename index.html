@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta http-equiv="X-UA-Compatible"
+      content="IE=edge">
+
+<title>Buku Induk Murid</title>
+
+<!-- FONT -->
+
+<!-- FONT -->
+
+<!-- Google Fonts: Poppins -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ICON -->
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- CSS -->
+
+<style>
+
+:root{
+
+    --primary:#1565c0;
+    --primary-dark:#0d47a1;
+    --success:#2e7d32;
+    --warning:#f9a825;
+    --danger:#c62828;
+
+    --bg:#f5f7fa;
+    --white:#ffffff;
+    --border:#d9d9d9;
+
+    --text:#222222;
+    --text-light:#666666;
+}
+
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    padding:20px;
+}
+
+/* CONTAINER */
+
+.container{
+
+    max-width:1300px;
+
+    margin:auto;
+}
+
+/* TOOLBAR */
+
+.toolbar{
+
+    background:var(--white);
+
+    padding:15px;
+
+    border-radius:10px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+
+    margin-bottom:20px;
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    align-items:center;
+}
+
+/* FORM */
+
+select,
+input{
+
+    height:42px;
+
+    padding:8px 12px;
+
+    border:1px solid var(--border);
+
+    border-radius:6px;
+
+    font-size:14px;
+}
+
+/* BUTTON */
+
+button{
+
+    height:42px;
+
+    padding:0 16px;
+
+    border:none;
+
+    border-radius:6px;
+
+    background:var(--primary);
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:500;
+
+    transition:0.3s;
+}
+
+button:hover{
+
+    background:var(--primary-dark);
+}
+
+/* AREA CETAK */
+
+.sheet{
+
+    width:210mm;
+
+    min-height:297mm;
+
+    background:white;
+
+    margin:auto;
+
+    padding:15mm;
+
+    box-shadow:0 0 15px rgba(0,0,0,.15);
+}
+
+/* JUDUL */
+
+.page-title{
+
+    text-align:center;
+
+    margin-bottom:20px;
+}
+
+.page-title h2{
+
+    font-size:24px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .sheet{
+
+        width:100%;
+
+        min-height:auto;
+
+        padding:15px;
+    }
+
+}
+
+/* PRINT */
+
+@media print{
+
+    .toolbar{
+        display:none;
+    }
+
+    body{
+        background:white;
+        padding:0;
+    }
+
+    .sheet{
+
+        width:100%;
+
+        margin:0;
+
+        box-shadow:none;
+    }
+
+    @page{
+
+        size:A4 portrait;
+
+        margin:10mm;
+    }
+}
+
+.section-atas{
+
+    display:flex;
+
+    gap:20px;
+
+    margin-bottom:20px;
+
+    align-items:flex-start;
+}
+
+.foto{
+
+    width:150px;
+
+    height:190px;
+
+    border:2px solid #000;
+
+    overflow:hidden;
+
+    flex-shrink:0;
+
+    background:#fff;
+}
+
+.foto img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+}
+
+.identitas{
+
+    flex:1;
+}
+
+.identitas table{
+
+    width:100%;
+
+    border-collapse:collapse;
+}
+
+.identitas td{
+
+    padding:5px;
+
+    vertical-align:top;
+
+    font-size:14px;
+}
+
+.identitas tr{
+
+    border-bottom:1px solid #e0e0e0;
+}
+
+.judulnilai{
+
+    text-align:center;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    margin-top:15px;
+
+    margin-bottom:10px;
+}
+
+.nilai{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    font-size:13px;
+}
+
+.nilai th{
+
+    background:#f2f2f2;
+
+    text-align:center;
+
+    font-weight:600;
+}
+
+.nilai td,
+.nilai th{
+
+    border:1px solid #000;
+
+    padding:5px;
+}
+
+.nilai td:first-child{
+
+    text-align:left;
+}
+
+.nilai td{
+
+    text-align:center;
+}
+
+.rata-semester{
+
+    background:#fff7d6;
+
+    font-weight:bold;
+}
+
+.orangtua-section{
+
+    margin-top:15px;
+    margin-bottom:20px;
+}
+
+.ortu-table{
+
+    width:100%;
+    border-collapse:collapse;
+}
+
+.ortu-table td{
+
+    padding:5px;
+    font-size:14px;
+    vertical-align:top;
+}
+
+.subjudul{
+
+    background:#f2f2f2;
+    font-weight:bold;
+    border-top:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    padding:8px !important;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- TOOLBAR -->
+
+    <div class="toolbar">
+
+<input
+  type="text"
+  id="nisInput"
+  placeholder="Masukkan NIS">
+
+<button onclick="cariNIS()">
+  Cari
+</button>
+
+
+        <button onclick="downloadPDF()">
+
+            <i class="fa fa-file-pdf"></i>
+
+            Download PDF
+
+        </button>
+
+<button onclick="downloadPDFSemua()">
+
+    <i class="fa fa-file-pdf"></i>
+
+    Download Semua PDF
+
+</button>
+
+        <button onclick="window.print()">
+
+            <i class="fa fa-print"></i>
+
+            Cetak
+
+        </button>
+
+        <button onclick="refreshData()">
+
+            <i class="fa fa-rotate"></i>
+
+            Refresh
+
+        </button>
+
+    </div>
+
+<div id="lembarData" class="sheet">
+
+        <!-- LEMBAR BUKU INDUK -->
+
+    <div class="page-title">
+
+        <h2>BUKU INDUK MURID</h2>
+
+    </div>
+
+
+<!-- IDENTITAS SISWA -->
+
+<div class="section-atas">
+
+    <!-- FOTO -->
+
+    <div class="foto">
+
+    <img
+        id="fotoSiswa"
+        src="https://via.placeholder.com/150x190?text=FOTO"
+        alt="Foto Siswa">
+
+</div>
+
+    <!-- DATA SISWA -->
+
+    <div class="identitas">
+
+        <table width="100%">
+
+            <tr>
+                <td width="180">Nama</td>
+                <td width="15">:</td>
+                <td id="nama"></td>
+            </tr>
+
+            <tr>
+                <td>NISN</td>
+                <td>:</td>
+                <td id="nisn"></td>
+            </tr>
+
+            <tr>
+                <td>NIS</td>
+                <td>:</td>
+                <td id="nis"></td>
+            </tr>
+
+            <tr>
+                <td>Tempat, Tgl Lahir</td>
+                <td>:</td>
+                <td id="ttl"></td>
+            </tr>
+
+            <tr>
+                <td>Jenis Kelamin</td>
+                <td>:</td>
+                <td id="jk"></td>
+            </tr>
+
+            <tr>
+                <td>Kelas</td>
+                <td>:</td>
+                <td id="kelas"></td>
+            </tr>
+
+            <tr>
+                <td>Alamat</td>
+                <td>:</td>
+                <td id="alamat"></td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- DATA ORANG TUA DAN WALI -->
+
+<div class="orangtua-section">
+
+    <table class="ortu-table">
+
+        <tr>
+            <td colspan="3" class="subjudul">
+                DATA AYAH
+            </td>
+        </tr>
+
+        <tr>
+            <td width="180">Nama Bapak</td>
+            <td width="15">:</td>
+            <td id="ayah"></td>
+        </tr>
+
+        <tr>
+            <td>Pekerjaan</td>
+            <td>:</td>
+            <td id="pekerjaanAyah"></td>
+        </tr>
+
+        <tr>
+            <td>Alamat</td>
+            <td>:</td>
+            <td id="alamatAyah"></td>
+        </tr>
+
+        <tr>
+            <td>No. HP</td>
+            <td>:</td>
+            <td id="hpAyah"></td>
+        </tr>
+
+        <tr>
+            <td colspan="3" class="subjudul">
+                DATA IBU
+            </td>
+        </tr>
+
+        <tr>
+            <td>Nama Ibu</td>
+            <td>:</td>
+            <td id="ibu"></td>
+        </tr>
+
+        <tr>
+            <td>Pekerjaan</td>
+            <td>:</td>
+            <td id="pekerjaanIbu"></td>
+        </tr>
+
+        <tr>
+            <td>Alamat</td>
+            <td>:</td>
+            <td id="alamatIbu"></td>
+        </tr>
+
+        <tr>
+            <td>No. HP</td>
+            <td>:</td>
+            <td id="hpIbu"></td>
+        </tr>
+
+        <tr>
+            <td colspan="3" class="subjudul">
+                DATA WALI
+            </td>
+        </tr>
+
+        <tr>
+            <td>Nama Wali</td>
+            <td>:</td>
+            <td id="wali"></td>
+        </tr>
+
+        <tr>
+            <td>Pekerjaan</td>
+            <td>:</td>
+            <td id="pekerjaanWali"></td>
+        </tr>
+
+        <tr>
+            <td>Alamat</td>
+            <td>:</td>
+            <td id="alamatWali"></td>
+        </tr>
+
+        <tr>
+            <td>No. HP</td>
+            <td>:</td>
+            <td id="hpWali"></td>
+        </tr>
+
+    </table>
+
+</div>
+
+<!-- DAFTAR NILAI -->
+
+<div class="judulnilai">
+
+    DAFTAR NILAI
+
+</div>
+
+<table class="nilai">
+
+<thead>
+
+<tr>
+
+  <th rowspan="2">Mata Pelajaran</th>
+
+  <th colspan="6">Semester</th>
+
+  <th rowspan="2">Rata-rata</th>
+
+</tr>
+
+<tr>
+
+  <th>1</th>
+  <th>2</th>
+  <th>3</th>
+  <th>4</th>
+  <th>5</th>
+  <th>6</th>
+
+</tr>
+
+</thead>
+
+    <tbody id="nilaiBody">
+
+        <!-- DIISI OTOMATIS JAVASCRIPT -->
+
+    </tbody>
+
+</table>
+
+</div>
+<!-- AKHIR LEMBAR DATA -->
+
+</div>
+<!-- AKHIR CONTAINER -->
+
+
+<script>
+
+const API =
+"https://script.google.com/macros/s/ISI_DEPLOY_ID_ANDA/exec";
+
+let currentId = "";
+async function cariNIS(){
+
+    const nis =
+    document.getElementById("nisInput")
+    .value
+    .trim();
+
+    if(!nis){
+
+        alert("Masukkan NIS");
+        return;
+
+    }
+
+    try{
+
+        const response =
+        await fetch(
+
+            API +
+            "?action=cari&nis=" +
+            encodeURIComponent(nis)
+
+        );
+
+        const data =
+        await response.json();
+
+        if(data.error){
+
+            alert(data.message);
+            return;
+
+        }
+
+        isiDataSiswa(data);
+
+        currentId =
+        data.siswa.id;
+
+    }catch(err){
+
+        alert(
+            "Data tidak ditemukan"
+        );
+
+        console.error(err);
+
+    }
+
+}
+
+/* =========================
+   ISI BIODATA
+========================= */
+
+function isiDataSiswa(data){
+
+    const siswa = data.siswa || {};
+    const ortu = data.ortu || {};
+
+
+    document.getElementById("fotoSiswa").src =
+siswa.foto ||
+"https://via.placeholder.com/150x190?text=FOTO";
+
+    document.getElementById("nama").innerText =
+    siswa.nama || "";
+
+    document.getElementById("nisn").innerText =
+    siswa.nisn || "";
+
+    document.getElementById("nis").innerText =
+    siswa.nis || "";
+
+    document.getElementById("ttl").innerText =
+    siswa.ttl || "";
+
+    document.getElementById("jk").innerText =
+    siswa.jk || "";
+
+    document.getElementById("kelas").innerText =
+    siswa.kelas || "";
+
+    document.getElementById("alamat").innerText =
+    siswa.alamat || "";
+
+    document.getElementById("ayah").innerText =
+    ortu.ayah || "";
+
+    document.getElementById("pekerjaanAyah").innerText =
+    ortu.pekerjaanAyah || "";
+
+    document.getElementById("alamatAyah").innerText =
+    ortu.alamatAyah || "";
+
+    document.getElementById("hpAyah").innerText =
+    ortu.hpAyah || "";
+
+    document.getElementById("ibu").innerText =
+    ortu.ibu || "";
+
+    document.getElementById("pekerjaanIbu").innerText =
+    ortu.pekerjaanIbu || "";
+
+    document.getElementById("alamatIbu").innerText =
+    ortu.alamatIbu || "";
+
+    document.getElementById("hpIbu").innerText =
+    ortu.hpIbu || "";
+
+    document.getElementById("wali").innerText =
+    ortu.wali || "";
+
+    document.getElementById("pekerjaanWali").innerText =
+    ortu.pekerjaanWali || "";
+
+    document.getElementById("alamatWali").innerText =
+    ortu.alamatWali || "";
+
+    document.getElementById("hpWali").innerText =
+    ortu.hpWali || "";
+
+    tampilNilai(data.nilai || []);
+}
+
+/* =========================
+   TABEL NILAI
+========================= */
+
+function tampilNilai(nilaiData){
+
+    if(!nilaiData.length){
+
+        document.getElementById(
+            "nilaiBody"
+        ).innerHTML =
+        '<tr><td colspan="8">Tidak ada data nilai</td></tr>';
+
+        return;
+
+    }
+
+    let html = "";
+
+    let totalS1 = 0;
+    let totalS2 = 0;
+    let totalS3 = 0;
+    let totalS4 = 0;
+    let totalS5 = 0;
+    let totalS6 = 0;
+
+    nilaiData.forEach(function(n){
+
+        const s1 = Number(n.s1 || 0);
+        const s2 = Number(n.s2 || 0);
+        const s3 = Number(n.s3 || 0);
+        const s4 = Number(n.s4 || 0);
+        const s5 = Number(n.s5 || 0);
+        const s6 = Number(n.s6 || 0);
+
+        totalS1 += s1;
+        totalS2 += s2;
+        totalS3 += s3;
+        totalS4 += s4;
+        totalS5 += s5;
+        totalS6 += s6;
+
+        const nilaiList = [
+            s1, s2, s3, s4, s5, s6
+        ];
+
+        const terisi =
+        nilaiList.filter(x => x > 0);
+
+        const rata =
+        terisi.length
+        ? terisi.reduce((a,b)=>a+b,0) /
+          terisi.length
+        : 0;
+
+        html += `
+
+        <tr>
+
+            <td>${n.mapel}</td>
+
+            <td>${s1}</td>
+            <td>${s2}</td>
+            <td>${s3}</td>
+            <td>${s4}</td>
+            <td>${s5}</td>
+            <td>${s6}</td>
+
+            <td>${rata.toFixed(2)}</td>
+
+        </tr>
+
+        `;
+
+    });
+
+    const jumlah =
+    nilaiData.length;
+
+html += `
+
+<tr class="rata-semester">
+
+    <td>Rata-rata</td>
+
+    <td>${(totalS1/jumlah).toFixed(2)}</td>
+    <td>${(totalS2/jumlah).toFixed(2)}</td>
+    <td>${(totalS3/jumlah).toFixed(2)}</td>
+    <td>${(totalS4/jumlah).toFixed(2)}</td>
+    <td>${(totalS5/jumlah).toFixed(2)}</td>
+    <td>${(totalS6/jumlah).toFixed(2)}</td>
+
+    <td></td>
+
+</tr>
+
+`;
+
+document.getElementById(
+    "nilaiBody"
+).innerHTML = html;
+
+}
+
+
+
+/* =========================
+   DOWNLOAD PDF
+========================= */
+
+async function downloadPDF(){
+
+    if(!currentId){
+
+        alert(
+            "Cari siswa terlebih dahulu"
+        );
+
+        return;
+
+    }
+
+    try{
+
+        const response =
+        await fetch(
+
+            API +
+            "?action=pdf&id=" +
+            currentId
+
+        );
+
+        const result =
+        await response.json();
+
+        if(
+            !result ||
+            !result.fileId
+        ){
+
+            alert(
+                "PDF gagal dibuat"
+            );
+
+            return;
+
+        }
+
+        if(
+            typeof Android !==
+            "undefined"
+        ){
+
+            Android.downloadFile(
+
+                result.downloadUrl,
+
+                result.fileName
+
+            );
+
+        }else{
+
+            window.open(
+
+                result.downloadUrl,
+
+                "_blank"
+
+            );
+
+        }
+
+    }catch(err){
+
+        alert(
+            "Gagal membuat PDF"
+        );
+
+        console.error(err);
+
+    }
+
+}
+
+async function downloadPDFSemua(){
+
+    try{
+
+        const response =
+        await fetch(
+
+            API +
+            "?action=pdfsemua"
+
+        );
+
+        const result =
+        await response.json();
+
+        if(
+            !result ||
+            !result.fileId
+        ){
+
+            alert(
+                "PDF gagal dibuat"
+            );
+
+            return;
+
+        }
+
+        if(
+            typeof Android !==
+            "undefined"
+        ){
+
+            Android.downloadFile(
+
+                result.downloadUrl,
+
+                result.fileName
+
+            );
+
+        }else{
+
+            window.open(
+
+                result.downloadUrl,
+
+                "_blank"
+
+            );
+
+        }
+
+    }catch(err){
+
+        alert(
+            "Gagal membuat PDF"
+        );
+
+        console.error(err);
+
+    }
+
+}
+
+/* =========================
+   REFRESH DATA
+========================= */
+
+function refreshData(){
+
+    document.getElementById("nisInput").value = "";
+
+    currentId = "";
+
+    document.getElementById("nama").innerText = "";
+    document.getElementById("nisn").innerText = "";
+    document.getElementById("nis").innerText = "";
+    document.getElementById("ttl").innerText = "";
+    document.getElementById("jk").innerText = "";
+    document.getElementById("kelas").innerText = "";
+    document.getElementById("alamat").innerText = "";
+
+    document.getElementById("ayah").innerText = "";
+    document.getElementById("pekerjaanAyah").innerText = "";
+    document.getElementById("alamatAyah").innerText = "";
+    document.getElementById("hpAyah").innerText = "";
+
+    document.getElementById("ibu").innerText = "";
+    document.getElementById("pekerjaanIbu").innerText = "";
+    document.getElementById("alamatIbu").innerText = "";
+    document.getElementById("hpIbu").innerText = "";
+
+    document.getElementById("wali").innerText = "";
+    document.getElementById("pekerjaanWali").innerText = "";
+    document.getElementById("alamatWali").innerText = "";
+    document.getElementById("hpWali").innerText = "";
+
+    document.getElementById("nilaiBody").innerHTML = "";
+
+    document.getElementById("fotoSiswa").src =
+    "https://via.placeholder.com/150x190?text=FOTO";
+
+}
+
+/* =========================
+   LOAD AWAL
+========================= */
+
+window.onload = function(){
+
+};
+
+
+</script>
+
+</body>
+</html>
